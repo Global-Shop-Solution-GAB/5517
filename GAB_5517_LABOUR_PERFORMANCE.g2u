@@ -1,0 +1,512 @@
+Program.Sub.ScreenSU.Start
+Gui.frmPerf..Create
+Gui.frmPerf..Size(15240,11715)
+Gui.frmPerf..MinX(0)
+Gui.frmPerf..MinY(0)
+Gui.frmPerf..Position(0,0)
+Gui.frmPerf..BackColor(-2147483633)
+Gui.frmPerf..MousePointer(0)
+Gui.frmPerf..Caption("Labour Performance Dashboard")
+Gui.frmPerf..Event(UnLoad,frmPerf_UnLoad)
+Gui.frmPerf.picGSSLogo.Create(PictureBox)
+Gui.frmPerf.picGSSLogo.Size(4125,960)
+Gui.frmPerf.picGSSLogo.Position(5550,45)
+Gui.frmPerf.picGSSLogo.ToolTip("Double-Click for additional functions")
+Gui.frmPerf.frameTotals.Create(Frame)
+Gui.frmPerf.frameTotals.Size(4335,975)
+Gui.frmPerf.frameTotals.Position(10620,10080)
+Gui.frmPerf.txtTotHrs.Create(TextBox,"",True,1215,300,0,120,480,True,1,"Arial",8,-2147483643,1)
+Gui.frmPerf.txtTotHrs.Parent("frameTotals")
+Gui.frmPerf.txtTotHrs.NumericOnly(False)
+Gui.frmPerf.txtTotHrs.Locked(True)
+Gui.frmPerf.lblHrs.Create(Label,"Tot Hrs Worked",True,1290,255,0,90,240,True,0,"Arial",8,-986896,0)
+Gui.frmPerf.lblHrs.Parent("frameTotals")
+Gui.frmPerf.txtEstHrs.Create(TextBox,"",True,1215,300,0,1530,480,True,1,"Arial",8,-2147483643,1)
+Gui.frmPerf.txtEstHrs.Parent("frameTotals")
+Gui.frmPerf.txtEstHrs.NumericOnly(False)
+Gui.frmPerf.txtEstHrs.Locked(True)
+Gui.frmPerf.lblEstHrs.Create(Label,"Tot Est Hrs",True,990,255,0,1650,240,True,0,"Arial",8,-986896,0)
+Gui.frmPerf.lblEstHrs.Parent("frameTotals")
+Gui.frmPerf.txtTotPerf.Create(TextBox,"",True,1215,300,0,2955,480,True,1,"Arial",8,-2147483643,1)
+Gui.frmPerf.txtTotPerf.Parent("frameTotals")
+Gui.frmPerf.txtTotPerf.NumericOnly(False)
+Gui.frmPerf.txtTotPerf.Locked(True)
+Gui.frmPerf.lblTotPerf.Create(Label,"Tot Performance",True,1350,255,0,2940,240,True,0,"Arial",8,-986896,0)
+Gui.frmPerf.lblTotPerf.Parent("frameTotals")
+Gui.frmPerf.txtIndTotPerf.Create(TextBox,"",False,1215,300,0,2955,480,True,1,"Arial",8,-2147483643,1)
+Gui.frmPerf.txtIndTotPerf.Parent("frameTotals")
+Gui.frmPerf.txtIndTotPerf.NumericOnly(False)
+Gui.frmPerf.txtIndTotPerf.Locked(True)
+Gui.frmPerf.txtIndTotEst.Create(TextBox,"",False,1215,300,0,1530,480,True,1,"Arial",8,-2147483643,1)
+Gui.frmPerf.txtIndTotEst.Parent("frameTotals")
+Gui.frmPerf.txtIndTotEst.NumericOnly(False)
+Gui.frmPerf.txtIndTotEst.Locked(True)
+Gui.frmPerf.txtIndTotHrs.Create(TextBox,"",False,1215,300,0,120,480,True,1,"Arial",8,-2147483643,1)
+Gui.frmPerf.txtIndTotHrs.Parent("frameTotals")
+Gui.frmPerf.txtIndTotHrs.NumericOnly(False)
+Gui.frmPerf.txtIndTotHrs.Locked(True)
+Gui.frmPerf.lblStatus.Create(Label,"Loading Performance....",False,1980,255,0,1500,75,True,0,"Arial",8,-2147483633,0)
+Gui.frmPerf.pbStatus.Create(ProgressBar)
+Gui.frmPerf.pbStatus.Visible(False)
+Gui.frmPerf.pbStatus.Size(1950,255)
+Gui.frmPerf.pbStatus.Position(1500,285)
+Gui.frmPerf.lblBegDate.Create(Label,"Beg. Date",True,1320,195,0,30,75,True,0,"Arial",8,-986896,0)
+Gui.frmPerf.dtpBeg.Create(DatePicker)
+Gui.frmPerf.dtpBeg.Size(1425,285)
+Gui.frmPerf.dtpBeg.Position(30,225)
+Gui.frmPerf.lblEndDate.Create(Label,"End Date",True,1320,195,0,30,615,True,0,"Arial",8,-986896,0)
+Gui.frmPerf.dtpEnd.Create(DatePicker)
+Gui.frmPerf.dtpEnd.Size(1425,285)
+Gui.frmPerf.dtpEnd.Position(30,765)
+Gui.frmPerf.cmdRefresh.Create(Button)
+Gui.frmPerf.cmdRefresh.Size(510,375)
+Gui.frmPerf.cmdRefresh.Position(1515,720)
+Gui.frmPerf.cmdRefresh.Caption("REFRESH")
+Gui.frmPerf.cmdRefresh.Event(Click,cmdRefresh_Click)
+Gui.frmPerf.GsGCPerf.Create(GsGridControl)
+Gui.frmPerf.GsGCPerf.Size(14940,8880)
+Gui.frmPerf.GsGCPerf.Position(15,1155)
+Gui.frmPerf.GsGCPerf.Event(RowCellClick,GsGCPerf_RowCellClick)
+Gui.frmPerf.GsGCPerf.Event(ColumnFilterChanged,GsGCPerf_ColumnFilterChanged)
+Program.Sub.ScreenSU.End
+
+Program.Sub.Preflight.Start	
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+f.ODBC.Connection!con.opencompanyconnection(60)
+'Anchors
+'0 - None
+'1 - Top
+'2 - Bottom
+'4 - Left
+'8 - Right
+F.Intrinsic.Control.CallSub(SetContextMenus)
+gui.frmPerf.GsGCPerf.anchor(15)
+gui.frmPerf.frameTotals.anchor(10)
+gui.frmPerf..Show
+Program.Sub.Main.End
+
+Program.Sub.loadData.Start
+F.Intrinsic.Control.Try
+	V.Local.sError.Declare
+	v.Local.i.Declare(long)
+	v.Local.dStr.Declare
+	v.Local.dEnd.Declare
+	v.Local.sSql.Declare
+	v.Local.sJob.Declare
+	v.Local.sSuf.Declare
+	v.Local.sSeq.Declare
+	v.Local.sCNm.Declare
+	v.Local.sPrt.Declare
+	v.Local.sPDs.Declare
+	v.Local.fTHr.Declare
+	v.Local.fEHr.Declare
+	v.Local.dCls.Declare
+	v.Local.dStr.Set(v.Screen.frmPerf!dtpBeg.Value)
+	v.Local.dEnd.Set(v.Screen.frmPerf!dtpEnd.Value)
+	
+	f.Intrinsic.Control.If(v.DataTable.dt.Exists)
+		f.Data.DataTable.Close("dt")
+	f.Intrinsic.Control.EndIf
+	
+	f.Intrinsic.Control.If(v.DataTable.dtMstr.Exists)
+		f.Data.DataTable.Close("dtMstr")
+	f.Intrinsic.Control.EndIf
+	
+	f.Intrinsic.String.Build("select V_JOB_HEADER.JOB, V_JOB_HEADER.SUFFIX, V_JOB_OPERATIONS.SEQ, V_JOB_HEADER.PART, V_JOB_HEADER.DESCRIPTION, V_JOB_HEADER.CUSTOMER, V_CUSTOMER_MASTER.NAME_CUSTOMER, V_JOB_HEADER.CUSTOMER_PO, V_JOB_HEADER.DATE_CLOSED from V_JOB_HEADER LEFT JOIN V_CUSTOMER_MASTER ON V_CUSTOMER_MASTER.CUSTOMER = V_JOB_HEADER.CUSTOMER LEFT JOIN V_JOB_OPERATIONS ON V_JOB_HEADER.JOB = V_JOB_OPERATIONS.JOB AND V_JOB_HEADER.SUFFIX = V_JOB_OPERATIONS.SUFFIX WHERE DATE_CLOSED>='{0}' AND DATE_CLOSED<='{1}' ORDER BY V_JOB_HEADER.JOB, V_JOB_HEADER.SUFFIX, V_JOB_OPERATIONS.SEQ",v.Local.dStr.PervasiveDate,v.Local.dEnd.PervasiveDate,v.Local.ssql)
+	F.Data.DataTable.CreateFromSQL("dt","con",v.Local.sSql,true)
+	F.Data.DataTable.Create("dtMstr",true)
+	
+	f.Intrinsic.Control.For(v.Local.i,0,v.DataTable.dt.RowCount--,1)
+		v.Local.sJob.Set(v.DataTable.dt(v.Local.i).JOB!FIELDVALTRIM)
+		v.Local.sSuf.Set(v.DataTable.dt(v.Local.i).SUFFIX!FIELDVALTRIM)
+		v.Local.sSeq.Set(v.DataTable.dt(v.Local.i).SEQ!FIELDVALTRIM)
+		v.Local.dCls.Set(v.DataTable.dt(v.Local.i).DATE_CLOSED!FIELDVAL)
+		v.Local.sCNm.Set(v.DataTable.dt(v.Local.i).NAME_CUSTOMER!FIELDVALTRIM)
+		v.Local.sPrt.Set(v.DataTable.dt(v.Local.i).PART!FIELDVALTRIM)
+		v.Local.sPDs.Set(v.DataTable.dt(v.Local.i).DESCRIPTION!FIELDVALTRIM)
+		
+		'Total hours worked,
+		f.Intrinsic.String.Build("select SUM(HOURS_WORKED) AS TOT_HOURS from JOB_DETAIL WHERE JOB='{0}' AND SUFFIX='{1}' and SEQ='{2}' AND LMO='L' GROUP BY JOB, SUFFIX, SEQ",v.Local.sJob,v.Local.sSuf,v.Local.sSeq,v.Local.sSql)
+		f.ODBC.Connection!con.executeandreturn(v.Local.sSql,v.Local.fTHr)
+		'Hours estimated
+		F.Intrinsic.String.Build("select HOURS_ESTIMATED from JOB_OPERATIONS WHERE LMO='L' AND JOB='{0}' AND SUFFIX='{1}' AND SEQ='{2}'",v.Local.sJob,v.Local.sSuf,v.Local.sSeq,v.Local.ssql)
+		f.ODBC.Connection!con.executeandreturn(v.Local.sSql,v.Local.fEHr)
+		'Hours by employee
+		f.Intrinsic.Control.If(v.DataTable.dtJDtl.Exists)
+			f.Data.DataTable.Close("dtJDtl")
+		f.Intrinsic.Control.EndIf
+		f.Intrinsic.string.Build("select Job, Suffix, Seq, Machine, EMPL, V_EMPLOYEE_MSTR.NAME, Cast (SUM(HOURS_WORKED) AS float) as 'HrsWrk', Cast (if({3}=0,0,if(SUM(HOURS_WORKED)=0,0,SUM(HOURS_WORKED) / {3})) as float) as 'PrcHrs', Round(Cast (if({3}=0,0,if(SUM(HOURS_WORKED)=0,0,SUM(HOURS_WORKED) / {3}))*{4} as float),2) as 'EmpEst' from JOB_DETAIL left join v_employee_mstr on JOB_DETAIL.EMPL = V_EMPLOYEE_MSTR.EMPLOYEE WHERE JOB='{0}' and suffix='{1}' and seq='{2}' AND LMO='L' GROUP BY JOB, SUFFIX, SEQ, EMPL, NAME, MACHINE",v.Local.sJob,v.Local.sSuf,v.Local.sSeq,v.Local.fTHr,v.Local.fEHr,v.Local.ssql)
+		f.Data.DataTable.CreateFromSQL("dtJDtl","con",v.Local.sSql,true)
+		f.Data.DataTable.AddColumn("dtJDtl","TotHrs","float",v.Local.fTHr)
+		f.Data.DataTable.AddColumn("dtJDtl","EstHrs","float",v.Local.fEHr)
+		f.Data.DataTable.AddColumn("dtJDtl","DateClosed","Date",v.Local.dCls)
+		F.Data.DataTable.AddColumn("dtJDtl","Name_Customer","String",v.Local.sCNm)
+		f.Data.DataTable.AddColumn("dtJDtl","Part","String",v.Local.sPrt)
+		f.Data.DataTable.AddColumn("dtJDtl","Description","String",v.Local.sPDs)
+		
+		F.Intrinsic.Control.If(v.DataTable.dtJDtl.RowCount,<>,0)
+			f.Data.DataTable.Merge("dtJDtl","dtMstr",true,4)
+		f.Intrinsic.Control.EndIf
+	f.Intrinsic.Control.Next(v.Local.i)
+F.Intrinsic.Control.Catch
+	F.Intrinsic.String.Build("Project: {0}{1}{1}Subroutine: {2}{1}Error Occurred {3} with description {4}{1}{1}GAB Version: {5}",V.Ambient.ScriptPath,V.Ambient.Newline,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Ambient.GABVersion,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	f.Intrinsic.Control.CallSub(frmPerf_UnLoad)
+F.Intrinsic.Control.EndTry
+Program.Sub.loadData.End
+
+Program.Sub.LoadTotals.Start
+F.Intrinsic.Control.Try
+	V.Local.sError.Declare
+	
+	V.Local.fTotal.Declare
+	V.Local.sTotal.Declare
+	
+
+	
+	F.Intrinsic.Control.SelectCase(V.Args.Caller)
+		F.Intrinsic.Control.Case("First")
+			F.Data.DataTable.Compute("dtMstr","SUM(EmpEst)"," ",V.Local.fTotal)
+			F.Intrinsic.String.Format(V.Local.fTotal,"#,###,###,##0.00",V.Local.sTotal)
+			Gui.frmPerf.txtEstHrs.Text(V.Local.sTotal)
+			F.Data.DataTable.Compute("dtMstr","SUM(HrsWrk)"," ",V.Local.fTotal)
+			F.Intrinsic.String.Format(V.Local.fTotal,"#,###,###,##0.00",V.Local.sTotal)
+			Gui.frmPerf.txtTotHrs.Text(V.Local.sTotal)
+			F.Intrinsic.Control.If(v.Screen.frmPerf!txtTotHrs.Text,<>,0)
+				F.Intrinsic.Math.Div(V.Screen.frmPerf!txtEstHrs.Text,V.Screen.frmPerf!txtTotHrs.Text,V.Local.fTotal)
+				F.Intrinsic.Math.Mult(v.Local.fTotal,100,v.Local.fTotal)
+			F.Intrinsic.Control.Else
+				V.Local.fTotal.Set(0)
+			F.Intrinsic.Control.EndIf
+			F.Intrinsic.String.Format(V.Local.fTotal,"#,###,###,##0.00",V.Local.sTotal)
+			Gui.frmPerf.txtTotPerf.Text(V.Local.sTotal)
+
+		F.Intrinsic.Control.Case("dtMstr")
+			F.Data.DataTable.Compute("dtMstr","SUM(EmpEst)",V.Args.Filter,V.Local.fTotal)
+			F.Intrinsic.String.Format(V.Local.fTotal,"#,###,###,##0.00",V.Local.sTotal)
+			Gui.frmPerf.txtEstHrs.Text(V.Local.sTotal)
+			F.Data.DataTable.Compute("dtMstr","SUM(HrsWrk)",V.Args.Filter,V.Local.fTotal)
+			F.Intrinsic.String.Format(V.Local.fTotal,"#,###,###,##0.00",V.Local.sTotal)
+			Gui.frmPerf.txtTotHrs.Text(V.Local.sTotal)
+			F.Intrinsic.Control.If(v.Screen.frmPerf!txtTotHrs.Text,<>,0)
+				F.Intrinsic.Math.Div(V.Screen.frmPerf!txtEstHrs.Text,V.Screen.frmPerf!txtTotHrs.Text,V.Local.fTotal)
+				F.Intrinsic.Math.Mult(v.Local.fTotal,100,v.Local.fTotal)
+			F.Intrinsic.Control.Else
+				V.Local.fTotal.Set(0)
+			F.Intrinsic.Control.EndIf
+			F.Intrinsic.String.Format(V.Local.fTotal,"#,###,###,##0.00",V.Local.sTotal)
+			Gui.frmPerf.txtTotPerf.Text(V.Local.sTotal)
+	F.Intrinsic.Control.EndSelect
+	
+F.Intrinsic.Control.Catch
+	F.Intrinsic.String.Build("Project: {0}{1}{1}Subroutine: {2}{1}Error Occurred {3} with description {4}{1}{1}GAB Version: {5}",V.Ambient.ScriptPath,V.Ambient.Newline,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Ambient.GABVersion,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	f.Intrinsic.Control.CallSub(frmPerf_UnLoad)
+F.Intrinsic.Control.EndTry
+Program.Sub.LoadTotals.End
+
+Program.Sub.cmdRefresh_Click.Start
+F.Intrinsic.UI.InvokeWaitDialog("Loading Labour")
+gui.frmPerf.GsGCPerf.visible(false)
+f.Intrinsic.Control.CallSub(disableAll)
+F.Intrinsic.Control.CallSub(loadData)
+f.Intrinsic.Control.If(v.DataTable.dtMstr.RowCount,=,0)
+	f.Intrinsic.UI.Msgbox("No Work Orders have been closed on this day.  Routine exiting.")
+	f.Intrinsic.UI.CloseWaitDialog
+	f.Intrinsic.Control.CallSub(enableAll)
+	f.Intrinsic.Control.ExitSub
+f.Intrinsic.Control.EndIf
+F.Intrinsic.Control.CallSub(loadtotals,"Caller","First")
+f.Intrinsic.Control.CallSub(formatGrid)		
+F.Intrinsic.Control.CallSub(Deserialize)
+f.Intrinsic.Control.CallSub(enableAll)
+gui.frmPerf.GsGCPerf.visible(true)
+f.Intrinsic.UI.CloseWaitDialog
+Program.Sub.cmdRefresh_Click.End
+
+Program.Sub.enableAll.Start
+f.Intrinsic.Control.Try
+	gui.frmPerf.cmdRefresh.Enabled(true)
+f.Intrinsic.Control.Catch
+	f.Intrinsic.UI.Msgbox(v.Ambient.ErrorDescription)
+	f.Intrinsic.Control.CallSub(frmPerf_UnLoad)
+f.Intrinsic.Control.EndTry
+Program.Sub.enableAll.End
+
+Program.Sub.disableAll.Start
+f.Intrinsic.Control.Try
+	gui.frmPerf.cmdRefresh.Enabled(false)
+f.Intrinsic.Control.Catch
+	f.Intrinsic.UI.Msgbox(v.Ambient.ErrorDescription)
+	f.Intrinsic.Control.CallSub(frmPerf_UnLoad)
+f.Intrinsic.Control.EndTry
+Program.Sub.disableAll.End
+
+Program.Sub.SetContextMenus.Start
+F.Intrinsic.Control.Try
+	V.Local.sError.Declare
+
+	Gui.frmPerf..ContextMenuCreate("ctxPR")
+	Gui.frmPerf.GsGCPerf.ContextMenuAttach("ctxPR")
+	Gui.frmPerf..ContextMenuAddItem("ctxPR","Refresh",0,"Refresh")
+	Gui.frmPerf..ContextMenuAddItem("ctxPR","Export",0,"Export")
+	Gui.frmPerf..ContextMenuAddItem("ctxPR","ResetColumns",0,"Reset Columns")
+	Gui.frmPerf..ContextMenuSetItemEventHandler("ctxPR","Refresh","MenuClickRefresh")
+	Gui.frmPerf..ContextMenuSetItemEventHandler("ctxPR","Export","MenuClickExport")
+	Gui.frmPerf..ContextMenuSetItemEventHandler("ctxPR","ResetColumns","MenuClickResetColumns")
+	
+F.Intrinsic.Control.Catch
+	F.Intrinsic.String.Build("Project: {0}{1}{1}Subroutine: {2}{1}Error Occurred {3} with description {4}{1}{1}GAB Version: {5}",V.Ambient.ScriptPath,V.Ambient.Newline,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Ambient.GABVersion,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(frmPerf_UnLoad)
+F.Intrinsic.Control.EndTry
+Program.Sub.SetContextMenus.End
+
+Program.Sub.MenuClickResetColumns.Start
+F.Intrinsic.Control.Try
+	V.Local.sError.Declare
+	
+	F.Global.Registry.AddValue(V.Caller.User,V.Caller.CompanyCode,"gvMstr",5517,1000,False,"Serialize",False,0,-999.0,1/1/1980,12:00:00 AM,"")
+	F.Intrinsic.Control.CallSub(cmdRefresh_Click)
+	
+F.Intrinsic.Control.Catch
+	F.Intrinsic.String.Build("Project: {0}{1}{1}Subroutine: {2}{1}Error Occurred {3} with description {4}{1}{1}GAB Version: {5}",V.Ambient.ScriptPath,V.Ambient.Newline,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Ambient.GABVersion,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	f.Intrinsic.Control.CallSub(frmPerf_UnLoad)
+F.Intrinsic.Control.EndTry
+Program.Sub.MenuClickResetColumns.End
+
+Program.Sub.MenuClickRefresh.Start
+F.Intrinsic.Control.Try
+	V.Local.sError.Declare
+
+	F.Intrinsic.Control.CallSub(cmdRefresh_Click)
+
+F.Intrinsic.Control.Catch
+	F.Intrinsic.String.Build("Project: {0}{1}{1}Subroutine: {2}{1}Error Occurred {3} with description {4}{1}{1}GAB Version: {5}",V.Ambient.ScriptPath,V.Ambient.Newline,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Ambient.GABVersion,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(frmPerf_UnLoad)
+F.Intrinsic.Control.EndTry
+Program.Sub.MenuClickRefresh.End
+
+Program.Sub.MenuClickExport.Start
+F.Intrinsic.Control.Try
+	V.Local.sError.Declare
+
+	V.Local.sFileExport.Declare
+	V.Local.bExcel.Declare
+	V.Local.bFileLocked.Declare
+	V.Local.sMsg.Declare
+	V.Local.sControl.Declare
+
+	V.Local.sControl.Set("GsGCPerf")
+	
+	F.Automation.MSExcel.CheckPresence(V.Local.bExcel)
+	F.Intrinsic.Control.If(V.Local.bExcel)
+		F.Intrinsic.String.Build("{0}\GAB_5517_{1}_Export.xlsx",V.Caller.LocalGssTempDir,V.Local.sControl,V.Local.sFileExport)
+		F.Intrinsic.File.IsFileLocked(V.Local.sFileExport,V.Local.bFileLocked)
+		F.Intrinsic.Control.If(V.Local.bFileLocked)
+			F.Intrinsic.String.Build("File is already open. Please close and export again.{0}File: {1}",V.Ambient.NewLine,V.Local.sFileExport,V.Local.sMsg)
+			F.Intrinsic.UI.Msgbox(V.Local.sMsg,"File In Use")
+		F.Intrinsic.Control.Else
+			Gui.frmPerf.[V.Local.sControl].Export(V.Local.sFileExport,"xlsx")
+			F.Intrinsic.Task.ShellExec(0,"",V.Local.sFileExport,"","",1)
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.Else
+		F.Intrinsic.String.Build("{0}\GAB_5517_{1}_Export.csv",V.Caller.LocalGssTempDir,V.Local.sControl,V.Local.sFileExport)
+		F.Intrinsic.File.IsFileLocked(V.Local.sFileExport,V.Local.bFileLocked)
+		F.Intrinsic.Control.If(V.Local.bFileLocked)
+			F.Intrinsic.String.Build("File is already open. Please close and export again.{0}File: {1}",V.Ambient.NewLine,V.Local.sFileExport,V.Local.sMsg)
+			F.Intrinsic.UI.Msgbox(V.Local.sMsg,"File In Use")
+		F.Intrinsic.Control.Else
+			Gui.frmPerf.[V.Local.sControl].Export(V.Local.sFileExport,"csv")
+		F.Intrinsic.Control.EndIf
+		F.Intrinsic.Task.ShellExec(0,"",V.Local.sFileExport,"","",1)
+	F.Intrinsic.Control.EndIf
+	
+F.Intrinsic.Control.Catch
+	F.Intrinsic.String.Build("Project: {0}{1}{1}Subroutine: {2}{1}Error Occurred {3} with description {4}{1}{1}GAB Version: {5}",V.Ambient.ScriptPath,V.Ambient.Newline,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Ambient.GABVersion,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(frmPerf_UnLoad)
+F.Intrinsic.Control.EndTry
+Program.Sub.MenuClickExport.End
+
+
+Program.Sub.formatGrid.Start
+gui.frmPerf.GsGCPerf.DataSource("dtMstr")
+gui.frmPerf.GsGCPerf.AddGridviewFromDatatable("gvMstr","dtMstr")
+gui.frmPerf.GsGCPerf.SetGridviewProperty("gvMstr","Editable","False")
+gui.frmPerf.GsGCPerf.SetGridviewProperty("gvMstr","ReadOnly","True")
+Gui.frmPerf.GsGCPerf.SetGridViewProperty("gvMstr","MultiSelect",True)
+Gui.frmPerf.GsGCPerf.SetGridViewProperty("gvMstr","AllowSort",True)
+Gui.frmPerf.GsGCPerf.SetGridViewProperty("gvMstr","AllowFilter",True)
+Gui.frmPerf.GsGCPerf.SetGridViewProperty("gvMstr","ShowGroupPanel",True)
+Gui.frmPerf.GsGCPerf.SetGridViewProperty("gvMstr","EnableAppearanceOddRow",True)
+Gui.frmPerf.GsGCPerf.SetGridViewProperty("gvMstr","OptionsViewColumnAutoWidth",True)
+	
+gui.frmPerf.GsGCPerf.SetColumnProperty("gvMstr","PrcHrs","Visible","False")
+gui.frmPerf.GsGCPerf.SetColumnProperty("gvMstr","TotHrs","Visible","False")
+gui.frmPerf.GsGCPerf.SetColumnProperty("gvMstr","EstHrs","Visible","False")
+gui.frmPerf.GsGCPerf.SetColumnProperty("gvMstr","EMPL","Visible","False")
+gui.frmPerf.GsGCPerf.SetColumnProperty("gvMstr","Job","Caption","Job")
+gui.frmPerf.GsGCPerf.SetColumnProperty("gvMstr","Suffix","Caption","Suffix")
+gui.frmPerf.GsGCPerf.SetColumnProperty("gvMstr","Seq","Caption","Seq")
+gui.frmPerf.GsGCPerf.SetColumnProperty("gvMstr","Machine","Caption","Machine")
+gui.frmPerf.GsGCPerf.SetColumnProperty("gvMstr","NAME","Caption","Employee Name")
+gui.frmPerf.GsGCPerf.SetColumnProperty("gvMstr","HrsWrk","Caption","Hours Worked")
+gui.frmPerf.GsGCPerf.SetColumnProperty("gvMstr","EmpEst","Caption","Estimated Hours")
+gui.frmPerf.GsGCPerf.SetColumnProperty("gvMstr","Name_Customer","Caption","Customer Name")
+gui.frmPerf.GsGCPerf.SetColumnProperty("gvMstr","DateClosed","Caption","Date Closed")
+
+gui.frmPerf.GsGCPerf.SetColumnProperty("gvMstr","Job","HeaderFontBold","True")
+gui.frmPerf.GsGCPerf.SetColumnProperty("gvMstr","Suffix","HeaderFontBold","True")
+gui.frmPerf.GsGCPerf.SetColumnProperty("gvMstr","Seq","HeaderFontBold","True")
+gui.frmPerf.GsGCPerf.SetColumnProperty("gvMstr","Machine","HeaderFontBold","True")
+gui.frmPerf.GsGCPerf.SetColumnProperty("gvMstr","Empl","HeaderFontBold","True")
+gui.frmPerf.GsGCPerf.SetColumnProperty("gvMstr","PrcHrs","HeaderFontBold","True")
+gui.frmPerf.GsGCPerf.SetColumnProperty("gvMstr","NAME","HeaderFontBold","True")
+gui.frmPerf.GsGCPerf.SetColumnProperty("gvMstr","HrsWrk","HeaderFontBold","True")
+gui.frmPerf.GsGCPerf.SetColumnProperty("gvMstr","EmpEst","HeaderFontBold","True")
+gui.frmPerf.GsGCPerf.SetColumnProperty("gvMstr","Name_Customer","HeaderFontBold","True")
+gui.frmPerf.GsGCPerf.SetColumnProperty("gvMstr","DateClosed","HeaderFontBold","True")
+gui.frmPerf.GsGCPerf.SetColumnProperty("gvMstr","Part","HeaderFontBold","True")
+gui.frmPerf.GsGCPerf.SetColumnProperty("gvMstr","Description","HeaderFontBold","True")
+
+
+GUI.frmPerf.GsGCPerf.AddgridGroupSummaryItem("gvMstr","EmpEst","EmpEst","SUM","| Hours Est: ","   ","n2")
+GUI.frmPerf.GsGCPerf.AddgridGroupSummaryItem("gvMstr","HrsWrk","HrsWrk","SUM","| Hours Act: ","   ","n2")
+
+gui.frmPerf.GsGCPerf.SetColumnProperty("gvMstr","DateClosed","DisplayCustomDateTime","d")
+gui.frmPerf.GsGCPerf.SetColumnProperty("gvMstr","HrsWrk","DisplayCustomNumeric","#,###,###,##0.00")
+gui.frmPerf.GsGCPerf.SetColumnProperty("gvMstr","EmpEst","DisplayCustomNumeric","#,###,###,##0.00")
+
+gui.frmPerf.GsGCPerf.SetColumnProperty("gvMstr","Job","CellForeColor","Blue")
+gui.frmPerf.GsGCPerf.SetColumnProperty("gvMstr","Suffix","CellForeColor","Blue")
+gui.frmPerf.GsGCPerf.SetColumnProperty("gvMstr","Seq","CellForeColor","Blue")
+
+gui.frmPerf.GsGCPerf.SetColumnProperty("gvMstr","Job","Width","65")
+gui.frmPerf.GsGCPerf.SetColumnProperty("gvMstr","Suffix","Width","50")
+gui.frmPerf.GsGCPerf.SetColumnProperty("gvMstr","Seq","Width","65")
+gui.frmPerf.GsGCPerf.SetColumnProperty("gvMstr","Machine","Width","50")
+
+
+Program.Sub.formatGrid.End
+
+Program.Sub.GsGCPerf_RowCellClick.Start
+v.Local.sWO.Declare
+v.Local.sSuffix.Declare
+v.Local.sParams.Declare
+
+F.Intrinsic.Control.SelectCase(V.Args.column)
+	F.Intrinsic.Control.CaseAny("Job","Suffix","SUFFIX","JOB","SEQ","Seq")
+		Gui.frmPerf.GsGCPerf.GetCellValueByColumnName("gvMstr","Job",V.Args.RowIndex,v.Local.sWO)
+		Gui.frmPerf.GsGCPerf.GetCellValueByColumnName("gvMstr","Suffix",V.Args.RowIndex,V.Local.sSuffix)
+		F.Intrinsic.String.ConcatCallWrapperArgs("7",V.Local.sWO,V.Local.sSuffix,"A",V.Local.sParams)
+		F.Global.General.CallWrapperAsync(450000,V.Local.sParams)
+	F.Intrinsic.Control.EndSelect
+Program.Sub.GsGCPerf_RowCellClick.End
+
+Program.Sub.GsGCPerf_ColumnFilterChanged.Start
+F.Intrinsic.Control.Try
+	V.Local.sError.Declare
+	
+	V.Local.bFilter.Declare	
+	V.Local.sFilter.Declare
+	V.Local.sInvalid.Declare
+	V.Local.bRet.Declare
+	V.Local.iCnt.Declare
+	V.Local.iCounter.Declare(Long,0)
+	V.Local.sMsg.Declare
+
+	F.Intrinsic.String.Split("StartsWith*!*Between*!*Contains*!*EndsWith*!*IsNullOrEmpty*!*?*!*IsOutlookInterval","*!*",V.Local.sInvalid)
+	F.Intrinsic.String.IsNullOrWhiteSpace(V.Args.ActiveFilterExpression,V.Local.bFilter)
+	Function.Intrinsic.Control.If(V.Local.bFilter,=,True)
+		F.Intrinsic.Control.CallSub(loadtotals,"Caller","dtMstr","Filter","")
+	Function.Intrinsic.Control.Else
+		F.Intrinsic.String.Replace(V.Args.ActiveFilterExpression,"[","",V.Local.sFilter)
+		F.Intrinsic.String.Replace(V.Local.sFilter,"]","",V.Local.sFilter)
+		F.Intrinsic.String.Build("{0}",V.Local.sFilter,V.Local.sFilter)
+
+		F.Intrinsic.Control.For(V.Local.iCnt,0,V.Local.sInvalid.UBound,1)
+			F.Intrinsic.String.IsInString(V.Local.sFilter,V.Local.sInvalid(V.Local.iCnt),False,V.Local.bRet)
+			F.Intrinsic.Control.If(V.Local.bRet,=,True)
+				F.Intrinsic.Math.Add(V.Local.iCounter,1,V.Local.iCounter)
+			F.Intrinsic.Control.endif
+		F.Intrinsic.Control.Next(V.Local.iCnt)
+
+		F.Intrinsic.Control.If(V.Local.iCounter,=,1)
+			Function.Intrinsic.String.Build("Grid will be filtered, but totals will not be recalculated, because one of the filters entered is an invalid filter for recalculating totals.{0}{0}Invalid Filters for recalculating totals:{0}- Is between{0}- Is not between{0}- Contains{0}- Does not contain{0}- Beings with{0}- Ends with{0}- Is blank{0}- Is not blank{0}- ?{0}- Calendar Checkboxes",V.Ambient.NewLine,V.Local.sMsg)
+			Function.Intrinsic.UI.Msgbox(V.Local.sMsg,"Filter Validation")
+		F.Intrinsic.Control.ElseIf(V.Local.iCounter,>,1)
+			Function.Intrinsic.String.Build("Grid will be filtered, but totals will not be recalculated, because more than one filter entered is an invalid filter for recalculating totals.{0}{0}Invalid Filters for recalculating totals:{0}- Is between{0}- Is not between{0}- Contains{0}- Does not contain{0}- Beings with{0}- Ends with{0}- Is blank{0}- Is not blank{0}- ?{0}- Calendar Checkboxes",V.Ambient.NewLine,V.Local.sMsg)
+			Function.Intrinsic.UI.Msgbox(V.Local.sMsg,"Filter Validation")
+		F.Intrinsic.Control.Else
+			F.Intrinsic.Control.CallSub(loadtotals,"Caller","dtMstr","Filter",V.Local.sFilter)
+		F.Intrinsic.Control.EndIf
+	Function.Intrinsic.Control.EndIf
+	
+F.Intrinsic.Control.Catch
+	F.Intrinsic.String.Build("Project: {0}{1}{1}Subroutine: {2}{1}Error Occurred {3} with description {4}{1}{1}GAB Version: {5}",V.Ambient.ScriptPath,V.Ambient.Newline,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Ambient.GABVersion,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	f.Intrinsic.Control.CallSub(frmPerf_UnLoad)
+F.Intrinsic.Control.EndTry
+Program.Sub.GsGCPerf_ColumnFilterChanged.End
+
+Program.Sub.Serialize.Start
+F.Intrinsic.Control.Try
+	V.Local.sError.Declare
+	
+	V.Local.sSerialize.Declare
+	
+	'gvMstr
+	Gui.frmPerf.GsGCPerf.Serialize("gvMstr",V.Local.sSerialize)
+	F.Global.Registry.AddValue(V.Caller.User,V.Caller.CompanyCode,"gvMstr",5517,1000,False,"Serialize",False,0,-999.0,1/1/1980,12:00:00 AM,V.Local.sSerialize)
+
+	
+F.Intrinsic.Control.Catch
+		F.Intrinsic.String.Build("Project: {0}{1}{1}Subroutine: {2}{1}Error Occurred {3} with description {4}{1}{1}GAB Version: {5}",V.Ambient.ScriptPath,V.Ambient.Newline,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Ambient.GABVersion,V.Local.sError)
+		F.Intrinsic.UI.Msgbox(V.Local.sError)
+		f.Intrinsic.Control.CallSub(frmPerf_unload)
+F.Intrinsic.Control.EndTry
+Program.Sub.Serialize.End
+
+Program.Sub.Deserialize.Start
+F.Intrinsic.Control.Try
+	V.Local.sError.Declare
+	
+	V.Local.sSerialize.Declare
+	
+	'Delete old registry records
+	F.Global.Registry.ReadValue(V.Caller.User,V.Caller.CompanyCode,"gvMstr",5517,0,5,"",V.Local.sSerialize)
+	F.Intrinsic.Control.If(V.Local.sSerialize.Trim,<>,"")
+		F.ODBC.Connection!common.OpenConnection(V.Ambient.Ccon,V.Ambient.Cuser,V.Ambient.Cpass)
+		F.ODBC.Connection!common.Execute("Delete From Gs_Registry Where Reg_ID = 5517 And Seq < 1000;")
+		F.ODBC.Connection!common.Close
+	F.Intrinsic.Control.EndIf
+
+	'gvPR
+	F.Global.Registry.ReadValue(V.Caller.User,V.Caller.CompanyCode,"gvMstr",5517,1000,6,"",V.Local.sSerialize)
+	F.Intrinsic.Control.If(V.Local.sSerialize.Trim,<>,"")
+		Gui.frmPerf.GsGCPerf.Deserialize(V.Local.sSerialize)
+	F.Intrinsic.Control.EndIf
+	
+F.Intrinsic.Control.Catch
+		F.Intrinsic.String.Build("Project: {0}{1}{1}Subroutine: {2}{1}Error Occurred {3} with description {4}{1}{1}GAB Version: {5}",V.Ambient.ScriptPath,V.Ambient.Newline,V.Ambient.CurrentSubroutine,V.Ambient.ErrorNumber,V.Ambient.ErrorDescription,V.Ambient.GABVersion,V.Local.sError)
+		F.Intrinsic.UI.Msgbox(V.Local.sError)
+		f.Intrinsic.Control.CallSub(frmPerf_unload)
+F.Intrinsic.Control.EndTry
+Program.Sub.Deserialize.End
+
+
+Program.Sub.frmPerf_UnLoad.Start
+F.Intrinsic.Control.CallSub(Serialize)
+F.ODBC.Connection!con.Close
+f.Intrinsic.Control.End
+Program.Sub.frmPerf_UnLoad.End
+
+Program.Sub.Comments.Start
+${$5$}$2.0.0.0$}$2
+${$6$}$rfisher$}$20200807112840874$}$b10QVt26jzz6R0J+Y14BUjvWwMpAez4tOPleEcBn9vR3kobKJsuMFt+Nwd//K82qtBhdwDODxK4=
+Program.Sub.Comments.End
